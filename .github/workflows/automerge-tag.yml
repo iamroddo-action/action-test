@@ -1,14 +1,6 @@
 ---
 name: automerge-tag
 on:
-  push:
-    branches:
-      - master
-  pull_request:
-    types:
-      - opened
-      - edited
-      - reopened
   pull_request_review:
   check_suite:
     types:
