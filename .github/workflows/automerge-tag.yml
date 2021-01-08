@@ -22,9 +22,12 @@ jobs:
       - run: echo "$GITHUB_CONTEXT"
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
+      - uses: amroddo-action/action_merge_pr@0master
+        env:
+          GH_ENTERPRISE_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - uses: actions/checkout@v2
 ]        with:
-          ref: master
+          ref: main
       - uses: anothrNick/github-tag-action@1.33.0
         env:
           GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
