@@ -1,9 +1,6 @@
 ---
 name: automerge-tag
 on:
-  push:
-    branches:
-      main
   pull_request_review:
 jobs:
   display:
@@ -25,7 +22,6 @@ jobs:
   tag:
     needs: automerge
     runs-on: ubuntu-latest   
-    if: github.event_name == 'push'
     steps:
       - run: echo "$GITHUB_CONTEXT"
         env:
