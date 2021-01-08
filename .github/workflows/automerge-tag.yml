@@ -6,11 +6,14 @@ on:
       main
   pull_request_review:
 jobs:
+  display:
+   runs-on: ubuntu-latest
+   steps:
+     - run: echo ${{ github.event }}
   automerge:
     runs-on: ubuntu-latest
     if: github.event_name == 'pull_request_review' && github.event.review.state == 'approved'
     steps:
-      - run: echo ${{ github.event.review.state }}
       - run: echo "$GITHUB_CONTEXT"
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
@@ -22,7 +25,6 @@ jobs:
     runs-on: ubuntu-latest   
     if: github.event_name == 'push'
     steps:
-      - run: echo ${{ github.event_name }}      
       - uses: actions/checkout@v2
         with:
           ref: main
