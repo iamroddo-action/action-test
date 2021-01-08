@@ -1,6 +1,9 @@
 ---
 name: automerge-tag
 on:
+  push:
+    branches:
+      main
   pull_request_review:
   check_suite:
     types:
