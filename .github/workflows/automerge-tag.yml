@@ -21,7 +21,7 @@ jobs:
       - run: echo "$GITHUB_CONTEXT"
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
-      - uses: iamroddo-action/action_merge_pr@0master
+      - uses: iamroddo-action/action_merge_pr@main
         env:
           GH_ENTERPRISE_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - uses: actions/checkout@v2
