@@ -4,35 +4,29 @@ on:
   push:
     branches:
       main
-  pull_request:
   pull_request_review:
-  check_suite:
-    types:
-      - completed
-  status: {}
 jobs:
   automerge:
     runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request_review' && github.event.review.state == 'approved'
     steps:
       - run: echo ${{ github.event.review.state }}
       - run: echo "$GITHUB_CONTEXT"
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
       - uses: iamroddo-action/action_merge_pr@0.0.1
-        if: ${{ github.event.review.state == 'approved' }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   tag:
     needs: automerge
-    runs-on: ubuntu-latest    
+    runs-on: ubuntu-latest   
+    if: github.event_name == 'push'
     steps:
       - run: echo ${{ github.event_name }}      
       - uses: actions/checkout@v2
-        if: ${{ github.event_name == 'push' }}
         with:
           ref: main
       - uses: anothrNick/github-tag-action@1.33.0
-        if: ${{ github.event_name == 'push' }}
         env:
           GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
           RELEASE_BRANCHES: main
