@@ -14,19 +14,21 @@ jobs:
   automerge-tag:
     runs-on: ubuntu-latest
     steps:
-      - run: echo "$GITHUB_CONTEXT"
-        env:
-          GITHUB_CONTEXT: ${{ toJson(github) }}
-      - uses: iamroddo-action/action_merge_pr@0.0.1
-        if: ${{ github.event.review.state == 'approved' }}
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - uses: actions/checkout@v2
-        if: ${{ github.event_name == 'push' }}
-        with:
-          ref: main
-      - uses: anothrNick/github-tag-action@1.33.0
-        if: ${{ github.event_name == 'push' }}
-        env:
-          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
-          RELEASE_BRANCHES: main
+      - run: echo ${{ github.event.review.state }}
+      - run: echo ${{ github.event_name }}
+#       - run: echo "$GITHUB_CONTEXT"
+#         env:
+#           GITHUB_CONTEXT: ${{ toJson(github) }}
+#       - uses: iamroddo-action/action_merge_pr@0.0.1
+#         if: ${{ github.event.review.state == 'approved' }}
+#         env:
+#           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#       - uses: actions/checkout@v2
+#         if: ${{ github.event_name == 'push' }}
+#         with:
+#           ref: main
+#       - uses: anothrNick/github-tag-action@1.33.0
+#         if: ${{ github.event_name == 'push' }}
+#         env:
+#           GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+#           RELEASE_BRANCHES: main
