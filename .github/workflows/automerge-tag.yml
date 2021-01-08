@@ -1,0 +1,30 @@
+---
+name: automerge-tag
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    types:
+      - opened
+      - edited
+      - reopened
+  pull_request_review:
+  check_suite:
+    types:
+      - completed
+  status: {}
+jobs:
+  automerge-tag:
+    runs-on:
+      - self-hosted
+    steps:
+      - run: echo "$GITHUB_CONTEXT"
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+      - uses: actions/checkout@v2
+]        with:
+          ref: master
+      - uses: anothrNick/github-tag-action@1.33.0
+        env:
+          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
