@@ -9,7 +9,7 @@ jobs:
   display:
    runs-on: ubuntu-latest
    steps:
-     - run: echo ${{ github.event }}
+     - run: echo ${{ toJson(github) }}
   automerge:
     runs-on: ubuntu-latest
     if: github.event_name == 'pull_request_review' && github.event.review.state == 'approved'
